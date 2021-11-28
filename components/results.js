@@ -6,8 +6,6 @@ import Loading from './Loading'
 import Result from './result'
 
 
-
-
 export default function Results(props) {
     const appContext = useContext(AppContext)
     const { seatGeek, getSeatGeek, loading} = appContext;
@@ -71,8 +69,9 @@ export default function Results(props) {
             <FlatList
             style={styles.list}
             data={seatGeek}
-            renderItem={({item}) => 
+            renderItem={({item, index}) => 
             <Result short_title={item.short_title} 
+            index={index}
             handleClick={()=>handleClick(item.url)}
             date={item.time_tbd?'TBD':(`${getDate(item.datetime_local.split('T')[0])} - ${getTime(item.datetime_local.split('T')[1])}`)}
             location={item.name}

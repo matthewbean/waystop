@@ -1,10 +1,11 @@
 import React from 'react'
 import { View, Image, Text, StyleSheet, Button } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useSpring, animated, config } from '@react-spring/native'
 
 
-
-export default function Result({ handleClick, short_title, date, location, lowest_price, highest_price, image }) {
+export default function Result({ index, handleClick, short_title, date, location, lowest_price, highest_price, image }) {
+    const props = useSpring({ to: { position: 'relative', left: 0, }, from: { position: 'relative', left: -500 }, delay: index*300+500, config: config.stiff })
     const textColor= '#fff'
     const dateIcon = <Icon name="calendar" size={16} color="#fff" />;
     const moneyIcon = <Icon name="money" size={16} color="#fff" />;
@@ -14,6 +15,7 @@ export default function Result({ handleClick, short_title, date, location, lowes
 
     const styles = StyleSheet.create({
         item: {
+
           fontSize: 18,
           lineHeight: 18,
           fontWeight: '900',
@@ -52,6 +54,7 @@ export default function Result({ handleClick, short_title, date, location, lowes
 
 
     return (       
+  <animated.View style={props}>
   <View style={styles.card}>
       <Image style={styles.image} source={{uri:image}} />
       <View style={styles.details}>
@@ -61,6 +64,7 @@ export default function Result({ handleClick, short_title, date, location, lowes
         {lowest_price &&<Text style={styles.price}>{moneyIcon}  {!highest_price? `${lowest_price}-$${highest_price}`:`$${lowest_price}`}</Text>}
       </View>
   <Button onPress={handleClick} color='#550000' title='See Event' />
-  </View>)
+  </View>
+  </animated.View>)
 }
 

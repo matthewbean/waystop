@@ -16,6 +16,8 @@ target 'AwesomeProject2' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
   target 'AwesomeProject2Tests' do
     inherit! :complete
     # Pods for testing
