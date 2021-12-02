@@ -3,16 +3,17 @@ import { View,  StyleSheet, FlatList, Linking, Dimensions } from 'react-native'
 import AppContext from '../context/appContext'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Loading from './Loading'
-import Movie from './movie'
+import MovieTheater from './movie-theater'
 
 
 
 
-export default function Movies(props) {
+export default function MoviesTheater(props) {
     const appContext = useContext(AppContext)
-    const { movies, getMovies, loading} = appContext;
+    const { movies, getMoviesTheater, loading} = appContext;
 
     const handleClick = (url) => {
+      console.log(url)
     Linking.canOpenURL(url).then(supported => {
       if (supported) {
         Linking.openURL(url);
@@ -24,7 +25,7 @@ export default function Movies(props) {
     const date = <Icon name="calendar" size={16} color="#ccc" />;
 
     useEffect(() => {
-        getMovies()
+        getMoviesTheater()
     }, [])
     function getDate(date){
         let arr=date.split('-')
@@ -47,14 +48,15 @@ export default function Movies(props) {
             style={styles.list}
             data={movies}
             renderItem={({item}) => 
-            <Movie 
+            <MovieTheater 
             title={item.title}
             overview={item.overview}
             image={item.image}
             release_date= {getDate(item.release_date.split('T')[0])}
             rating={item.rating}
             id={item.id} 
-            ></Movie>} />
+            handleClick={()=>handleClick(`https://www.fandango.com/93710_movietimes?mode=general&q=93710`)}
+            ></MovieTheater>} />
         </View>
     )
     )

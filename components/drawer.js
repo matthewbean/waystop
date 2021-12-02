@@ -5,10 +5,7 @@ import { Image, Text, StyleSheet, View, Animated } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AppContext from "../context/appContext";
 
-import Results from './results'
-import Movies from './movies'
-import Recipes from './recipes'
-import PageControls from './pageControls'
+import Results from '../pages/results'
 import MenuBar from './menubar'
 import Settings from '../pages/settings'
 

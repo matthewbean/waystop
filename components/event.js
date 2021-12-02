@@ -1,17 +1,21 @@
 import React from 'react'
 import { View, Image, Text, StyleSheet, Button } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useSpring, animated, config } from '@react-spring/native'
 
 
-
-export default function Movie({title, overview, image, release_date, rating, id }) {
+export default function Event({ index, handleClick, short_title, date, location, lowest_price, highest_price, image }) {
+    const props = useSpring({ to: { position: 'relative', left: 0, }, from: { left: -800 }, delay: index*300+500, config: config.stiff })
     const textColor= '#fff'
     const dateIcon = <Icon name="calendar" size={16} color="#fff" />;
+    const moneyIcon = <Icon name="money" size={16} color="#fff" />;
+    const locationIcon = <Icon name="map-signs" size={16} color="#fff" />;
 
     
 
     const styles = StyleSheet.create({
         item: {
+
           fontSize: 18,
           lineHeight: 18,
           fontWeight: '900',
@@ -20,10 +24,10 @@ export default function Movie({title, overview, image, release_date, rating, id 
         date: {
             color: textColor
         },
-        rating: {
+        venue: {
             color: textColor
         },
-        overview: {
+        price: {
             color: textColor,
         },
         details: {
@@ -32,7 +36,7 @@ export default function Movie({title, overview, image, release_date, rating, id 
         },
         image: {
           width: '100%',
-          height: 500,
+          height: 200,
           borderRadius: 3,
           alignSelf: 'center'
         },
@@ -40,6 +44,7 @@ export default function Movie({title, overview, image, release_date, rating, id 
             margin: 3,
             borderRadius: 5,
             elevation: 3,
+            backgroundColor: '#D46A6A',
             backgroundColor: '#801616',
             marginBottom: 20,
             padding: 20
@@ -49,15 +54,17 @@ export default function Movie({title, overview, image, release_date, rating, id 
 
 
     return (       
+  <animated.View style={props}>
   <View style={styles.card}>
       <Image style={styles.image} source={{uri:image}} />
       <View style={styles.details}>
-        <Text style={styles.item}>{title}</Text>
-        <Text style={styles.date}>{dateIcon}  Release: {release_date}</Text>
-        <Text style={styles.rating}>  {rating}</Text>
-        <Text style={styles.overview}>{overview}</Text>
+        <Text style={styles.item}>{short_title}</Text>
+        <Text style={styles.date}>{dateIcon}  {date}</Text>
+        <Text style={styles.venue}>{locationIcon}  {location}</Text>
+        {lowest_price &&<Text style={styles.price}>{moneyIcon}  {!highest_price? `${lowest_price}-$${highest_price}`:`$${lowest_price}`}</Text>}
       </View>
-  <Button color='#550000' title='See Movie Times' />
-  </View>)
+  <Button onPress={handleClick} color='#550000' title='See Event' />
+  </View>
+  </animated.View>)
 }
 

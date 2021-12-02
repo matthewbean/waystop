@@ -3,10 +3,10 @@ import { View,  StyleSheet, FlatList, Linking, Dimensions } from 'react-native'
 import AppContext from '../context/appContext'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Loading from './Loading'
-import Result from './result'
+import Event from './event'
 
 
-export default function Results(props) {
+export default function Events(props) {
     const appContext = useContext(AppContext)
     const { seatGeek, getSeatGeek, loading} = appContext;
 
@@ -70,14 +70,14 @@ export default function Results(props) {
             style={styles.list}
             data={seatGeek}
             renderItem={({item, index}) => 
-            <Result short_title={item.short_title} 
+            <Event short_title={item.short_title} 
             index={index}
             handleClick={()=>handleClick(item.url)}
             date={item.time_tbd?'TBD':(`${getDate(item.datetime_local.split('T')[0])} - ${getTime(item.datetime_local.split('T')[1])}`)}
             location={item.name}
             lowest_price={item.lowest_price}
             highest_price={item.highest_price}
-            image={item.performers[0].image}></Result>} />
+            image={item.performers[0].image}></Event>} />
         </View>
     )
     )

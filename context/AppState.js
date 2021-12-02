@@ -22,6 +22,7 @@ const AppState = props=>{
         movies: null,
         recipes: null,
         recipe: null,
+        resultsType: 'moviesStreaming',
         page: 1,
         loading: true,
         modalLoading: true,
@@ -47,17 +48,31 @@ const AppState = props=>{
                 console.log(error)
             }
         }
-    //get movies
-    const getMovies= async ()=>{
+    //get movies streaming
+    const getMoviesStreaming= async ()=>{
         dispatch({type: SET_LOADING})
         try {
-            const res = await axios.get(`http://10.0.0.91:9000/movies`,
+            const res = await axios.get(`http://10.0.0.91:9000/moviesStreaming`,
             {
                 params: {
                     "page": state.page
                 }
             })
-            console.log(res.data)
+            dispatch({type: GET_MOVIES, payload:res.data})
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    //get movies theater
+    const getMoviesTheater= async ()=>{
+        dispatch({type: SET_LOADING})
+        try {
+            const res = await axios.get(`http://10.0.0.91:9000/moviesTheater`,
+            {
+                params: {
+                    "page": state.page
+                }
+            })
             dispatch({type: GET_MOVIES, payload:res.data})
         } catch (error) {
             console.log(error)
@@ -150,11 +165,13 @@ const AppState = props=>{
                 loading: state.loading,
                 modalLoading: state.modalLoading,
                 page: state.page,
+                resultsType: state.resultsType,
                 sidebar: state.sidebar,
                 modalVisible: state.modalVisible,
                 getSeatGeek,
                 getRecipe,
-                getMovies,
+                getMoviesStreaming,
+                getMoviesTheater,
                 getRecipes,
                 getRecipe,
                 closeModal,
