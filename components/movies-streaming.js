@@ -10,7 +10,7 @@ import MovieStreaming from './movie-streaming'
 
 export default function MoviesStreaming(props) {
     const appContext = useContext(AppContext)
-    const { movies, getMoviesStreaming, loading} = appContext;
+    const { movies, getMoviesStreaming, loading, getStreamingProviders} = appContext;
 
     const handleClick = (url) => {
     Linking.canOpenURL(url).then(supported => {
@@ -55,6 +55,7 @@ export default function MoviesStreaming(props) {
             release_date= {getDate(item.release_date.split('T')[0])}
             rating={item.rating}
             id={item.id} 
+            handleClick={()=>{getStreamingProviders(item.id)}}
             ></MovieStreaming>} />
         </View>
     )

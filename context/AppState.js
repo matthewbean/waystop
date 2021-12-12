@@ -12,7 +12,8 @@ import{
     GET_RECIPE,
     SET_MODAL,
     SET_MODAL_LOADING,
-    SET_MENU
+    SET_MENU,
+    GET_PROVIDERS
 } from './types'
 
 const AppState = props=>{
@@ -20,6 +21,7 @@ const AppState = props=>{
     const initialState = {
         seatGeek: null,
         movies: null,
+        movieProviders: null,
         recipes: null,
         recipe: null,
         resultsType: 'moviesStreaming',
@@ -59,6 +61,21 @@ const AppState = props=>{
                 }
             })
             dispatch({type: GET_MOVIES, payload:res.data})
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const getStreamingProviders= async (id)=>{
+        console.log(id)
+        try {
+            const res = await axios.get(`http://10.0.0.91:9000/movieStreamingProviders`,
+            {
+                params: {
+                    "id": id
+                }
+            })
+            console.log(res.data)
+            dispatch({type: GET_PROVIDERS, payload:res.data})
         } catch (error) {
             console.log(error)
         }
@@ -171,6 +188,7 @@ const AppState = props=>{
                 getSeatGeek,
                 getRecipe,
                 getMoviesStreaming,
+                getStreamingProviders,
                 getMoviesTheater,
                 getRecipes,
                 getRecipe,

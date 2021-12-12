@@ -19,10 +19,13 @@ const Drawer = ()=> {
     <NavigationContainer>
       <Tab.Navigator screenOptions={{
           header: ()=><MenuBar />,
-          tabBarStyle: {backgroundColor: '#801616', borderTopColor: '#801616'}
+          tabBarStyle: {backgroundColor: '#801616', borderTopColor: '#801616'},
+          tabBarLabelStyle:{ fontSize: 12 },
+          tabBarActiveTintColor: '#fff',
+          tabBarInactiveTintColor: '#999'
       }}>
-        <Tab.Screen options= {{tabBarIcon: ()=><Icon name="home" size={24} color="#fff" />}} name="Results" component={Results} />
-        <Tab.Screen options= {{tabBarIcon: ()=><Icon name="cog" size={24} color="#fff" />}}  name="Settings" component={Settings} />
+        <Tab.Screen options= {{ tabBarIcon: ({ focused, color })=><Icon name="home" size={24} color={ color } />}} name="Results" component={Results} />
+        <Tab.Screen options= {{tabBarIcon: ({ focused, color })=><Icon name="cog" size={24} color={ color } />}}  name="Settings" component={Settings} />
       </Tab.Navigator>
     </NavigationContainer>
   );

@@ -1,4 +1,4 @@
-import { NEXT_PAGE, SET_MENU, GET_RECIPES, GET_RECIPE, GET_MOVIES, SET_MODAL_LOADING, SET_MODAL, PREVIOUS_PAGE, SET_SEAT_GEEK, SET_LOADING } from './types'
+import { NEXT_PAGE, SET_MENU, GET_RECIPES, GET_RECIPE, GET_PROVIDERS, GET_MOVIES, SET_MODAL_LOADING, SET_MODAL, PREVIOUS_PAGE, SET_SEAT_GEEK, SET_LOADING } from './types'
 // eslint-disable-next-line
 export default (state, action) =>{
     switch(action.type){
@@ -19,6 +19,9 @@ export default (state, action) =>{
             return{...state,
                 movies: action.payload,
                     loading: false}
+        case GET_PROVIDERS:
+            return{...state,
+                    movieProviders: action.payload}
         case GET_RECIPES:
             return{...state,
                 recipes: action.payload,
