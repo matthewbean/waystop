@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { Text, TouchableOpacity, StyleSheet } from 'react-native'
 
 
 
@@ -19,7 +19,8 @@ export default function IconButton({ size, iconPosition, icon, text, color, onPr
       buttonText:{
         fontSize: 16,
         color: '#fff',
-        fontWeight: '500'
+        fontWeight: '500',
+        textAlign: 'center'
       }
       });
 

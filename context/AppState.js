@@ -13,7 +13,8 @@ import{
     SET_MODAL,
     SET_MODAL_LOADING,
     SET_MENU,
-    GET_PROVIDERS
+    GET_PROVIDERS,
+    SET_PROVIDER
 } from './types'
 
 const AppState = props=>{
@@ -30,7 +31,23 @@ const AppState = props=>{
         modalLoading: true,
         foodType: 'chicken',
         modalVisible: false,
-        sidebar: false
+        sidebar: false,
+        providers: [
+            {name: 'Netflix',
+             owned: false},
+            {name: 'Disney Plus',
+             owned: false},
+            {name: 'Hulu',
+             owned: false},
+            {name: 'Peacock',
+             owned: false},
+            {name: 'Crunchyroll',
+             owned: false},
+            {name: 'Amazon Prime Video',
+             owned: false},
+            {name: 'HBO Max',
+             owned: false},
+        ]
     };
     const [state, dispatch] = useReducer(appReducer, initialState);
     //get events
@@ -171,6 +188,10 @@ const AppState = props=>{
             console.log(error)
         }
     }
+    //change provider
+    const toggleProvider=(index)=>{
+        dispatch({ type: SET_PROVIDER, payload: index })
+    }
 //set context 
     return (
         <AppContext.Provider 
@@ -185,6 +206,7 @@ const AppState = props=>{
                 resultsType: state.resultsType,
                 sidebar: state.sidebar,
                 modalVisible: state.modalVisible,
+                providers: state.providers,
                 getSeatGeek,
                 getRecipe,
                 getMoviesStreaming,
